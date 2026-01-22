@@ -1,0 +1,78 @@
+import defaultPhoto from '../assets/default-member.jpg';
+
+export const hmifMembers = {
+    title: "PENGURUS HMIF 2025/2026",
+    bph: [
+        { jabatan: "Ketua", nama: "Tio Alan Kurniawan", foto: defaultPhoto },
+        { jabatan: "Wakil Ketua", nama: "Tumba TL.Sihombing", foto: defaultPhoto },
+        { jabatan: "Sekretaris", nama: "Advhenita Destriana Wiwonto", foto: defaultPhoto },
+        { jabatan: "Bendahara", nama: "Elvinda Kenia Tri Prastika", foto: defaultPhoto },
+    ],
+    divisions: [
+        {
+            name: "Divisi Minat & Bakat",
+            coordinator: { nama: "Pebrianus Regis Sabomban", foto: defaultPhoto },
+            members: [
+                { nama: "Jodi Saputra Sitanggang", foto: defaultPhoto },
+                { nama: "Burju Efraim Purba", foto: defaultPhoto },
+                { nama: "Felicia Anggun Devika", foto: defaultPhoto },
+                { nama: "Virly Setyo Eka Andrian", foto: defaultPhoto },
+                { nama: "Benedictus Alphonsius Putra Prasetya", foto: defaultPhoto },
+                { nama: "Stevany Geraldi Rade", foto: defaultPhoto },
+            ]
+        },
+        {
+            name: "Divisi Media Komunikasi & Informasi",
+            coordinator: { nama: "Thomas Paskal Eka Hari Murti", foto: defaultPhoto },
+            members: [
+                { nama: "Yohana Sarnike Bulu", foto: defaultPhoto },
+                { nama: "Michael Gelar Swasana Jati", foto: defaultPhoto },
+                { nama: "Robertus Ardian Satrio Prabowo", foto: defaultPhoto },
+                { nama: "Gerasimus Fridolin Juan Dua", foto: defaultPhoto },
+                { nama: "Ramaeyza Nada Nadhifa", foto: defaultPhoto },
+            ]
+        },
+        {
+            name: "Divisi Humas & Advokasi",
+            coordinator: { nama: "Yoas Flegon Angi Saputra", foto: defaultPhoto },
+            members: [
+                { nama: "Gabriel Batista Bimantara Dumais", foto: defaultPhoto },
+                { nama: "Genoveva Anela Reva Putri Adipna", foto: defaultPhoto },
+                { nama: "Angela Kasih Christy Maharani", foto: defaultPhoto },
+            ]
+        },
+        {
+            name: "Divisi Sosial",
+            coordinator: { nama: "Agustinus Wisik", foto: defaultPhoto },
+            members: [
+                { nama: "Yohana Melly Barmita Sari", foto: defaultPhoto },
+                { nama: "Agustinus Eko Kristiawan", foto: defaultPhoto },
+                { nama: "Maria Rufina Editha Kedhi", foto: defaultPhoto },
+            ]
+        },
+        {
+            name: "Divisi Web Holder",
+            coordinator: { nama: "Wilston Laurentius Dai Keraf", foto: defaultPhoto },
+            members: [
+                { nama: "Daniel Joan Fernando", foto: defaultPhoto },
+            ]
+        },
+        {
+            name: "Divisi PSDM",
+            coordinator: { nama: "Gabriella Nava Trivana Irianto", foto: defaultPhoto },
+            members: [
+                { nama: "Bernardus Febrian", foto: defaultPhoto },
+                { nama: "Celsia Aprilia Timang", foto: defaultPhoto },
+            ]
+        },
+        {
+            name: "Divisi Kewirausahaan",
+            coordinator: { nama: "Rachel Rambu Sedu Oyi", foto: defaultPhoto },
+            members: [
+                { nama: "Maximillianus Mahasmara", foto: defaultPhoto },
+                { nama: "Gabriela Angelina Olivia Hure", foto: defaultPhoto },
+                { nama: "Georgius Satria Putra Pamungkas", foto: defaultPhoto },
+            ]
+        },
+    ]
+};
