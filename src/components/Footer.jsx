@@ -10,9 +10,7 @@ const Footer = () => {
                     <p className={styles.university}>Universitas Sanata Dharma</p>
                 </div>
                 <div className={styles.links}>
-                    <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className={styles.link}>Instagram</a>
-                    <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className={styles.link}>LinkedIn</a>
-                    <a href="https://github.com" target="_blank" rel="noopener noreferrer" className={styles.link}>GitHub</a>
+                    <a href="https://www.instagram.com/hmif.usd/" target="_blank" rel="noopener noreferrer" className={styles.link}>Instagram</a>
                 </div>
                 <div className={styles.copy}>
                     &copy; 2026 HMIF USD. Dibangun untuk Masa Depan.
