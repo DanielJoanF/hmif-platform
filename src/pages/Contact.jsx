@@ -17,7 +17,7 @@ const Contact = () => {
                 </div>
                 <div className="glass-panel" style={{ padding: '24px', textAlign: 'center' }}>
                     <h3 style={{ color: 'var(--primary)', marginBottom: '12px' }}>📱 Instagram</h3>
-                    <p style={{ color: 'var(--text-muted)' }}>@hmif_usd</p>
+                    <p style={{ color: 'var(--text-muted)' }}>@hmif.usd</p>
                 </div>
             </div>
         </div>

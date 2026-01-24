@@ -13,7 +13,7 @@ const Footer = () => {
                     <a href="https://www.instagram.com/hmif.usd/" target="_blank" rel="noopener noreferrer" className={styles.link}>Instagram</a>
                 </div>
                 <div className={styles.copy}>
-                    &copy; 2026 HMIF USD. Dibangun untuk Masa Depan.
+                    &copy; 2026 HMIF USD.
                 </div>
             </div>
         </footer>
