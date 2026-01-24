@@ -1,12 +1,13 @@
 import { useState, useEffect, useRef } from 'react';
 import { sendMessageToGemini } from '../services/geminiService';
 import { getForumMessages, postForumMessage } from '../services/forumService';
+import { apiService } from '../services/apiService';
 import styles from './ChatWidget.module.css';
 
 const ChatWidget = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [activeTab, setActiveTab] = useState('bot'); // 'bot' or 'forum'
-  
+
   // Bot State
   const [botMessages, setBotMessages] = useState([
     { id: 1, sender: 'bot', text: 'Halo! Aku asisten HMIF. Ada yang bisa kubantu hari ini? 😊' }
@@ -22,7 +23,11 @@ const ChatWidget = () => {
   const messagesEndRef = useRef(null);
 
   useEffect(() => {
-    setForumMessages(getForumMessages());
+    const loadForumMessages = async () => {
+      const messages = await getForumMessages();
+      setForumMessages(messages);
+    };
+    loadForumMessages();
   }, []);
 
   useEffect(() => {
@@ -34,28 +39,47 @@ const ChatWidget = () => {
 
     const userMessage = { id: Date.now(), sender: 'user', text: botInput };
     setBotMessages(prev => [...prev, userMessage]);
+
+    const userInputText = botInput;
     setBotInput('');
     setIsLoading(true);
 
-    const history = botMessages.filter(m => m.sender !== 'bot' || m.id !== 1);
-    const response = await sendMessageToGemini(history, botInput);
-    
-    setBotMessages(prev => [...prev, { id: Date.now() + 1, sender: 'bot', text: response }]);
-    setIsLoading(false);
+    try {
+      // Save user message to database
+      await apiService.post('/chatbot', { sender: 'user', text: userInputText });
+
+      const history = botMessages.filter(m => m.sender !== 'bot' || m.id !== 1);
+      const response = await sendMessageToGemini(history, userInputText);
+
+      const botMessage = { id: Date.now() + 1, sender: 'bot', text: response };
+      setBotMessages(prev => [...prev, botMessage]);
+
+      // Save bot response to database
+      await apiService.post('/chatbot', { sender: 'bot', text: response });
+    } catch (error) {
+      console.error('Error in chatbot:', error);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
-  const handleSendForumMessage = () => {
+  const handleSendForumMessage = async () => {
     if (!forumInput.trim()) return;
-    const newMsg = postForumMessage(username, forumInput);
-    setForumMessages(prev => [...prev, newMsg]);
-    setForumInput('');
+    try {
+      const newMsg = await postForumMessage(username, forumInput);
+      setForumMessages(prev => [...prev, newMsg]);
+      setForumInput('');
+    } catch (error) {
+      console.error('Failed to send forum message:', error);
+      alert('Gagal mengirim pesan. Pastikan server backend berjalan.');
+    }
   };
 
   return (
     <>
       {/* Floating Action Button */}
-      <button 
-        className={styles.fab} 
+      <button
+        className={styles.fab}
         onClick={() => setIsOpen(!isOpen)}
         aria-label="Toggle Chat"
       >
@@ -67,13 +91,13 @@ const ChatWidget = () => {
         <div className={`${styles.panel} glass-panel`}>
           {/* Tabs */}
           <div className={styles.tabs}>
-            <button 
+            <button
               className={`${styles.tab} ${activeTab === 'bot' ? styles.activeTab : ''}`}
               onClick={() => setActiveTab('bot')}
             >
               🤖 AI Asisten
             </button>
-            <button 
+            <button
               className={`${styles.tab} ${activeTab === 'forum' ? styles.activeTab : ''}`}
               onClick={() => setActiveTab('forum')}
             >
@@ -86,8 +110,8 @@ const ChatWidget = () => {
             <div className={styles.content}>
               <div className={styles.messages}>
                 {botMessages.map(msg => (
-                  <div 
-                    key={msg.id} 
+                  <div
+                    key={msg.id}
                     className={`${styles.message} ${msg.sender === 'user' ? styles.userMsg : styles.botMsg}`}
                   >
                     {msg.text}
@@ -97,7 +121,7 @@ const ChatWidget = () => {
                 <div ref={messagesEndRef} />
               </div>
               <div className={styles.inputArea}>
-                <input 
+                <input
                   type="text"
                   value={botInput}
                   onChange={(e) => setBotInput(e.target.value)}
@@ -129,14 +153,14 @@ const ChatWidget = () => {
                 <div ref={messagesEndRef} />
               </div>
               <div className={styles.inputArea}>
-                <input 
+                <input
                   type="text"
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
                   placeholder="Nama..."
                   className={`${styles.input} ${styles.usernameInput}`}
                 />
-                <input 
+                <input
                   type="text"
                   value={forumInput}
                   onChange={(e) => setForumInput(e.target.value)}

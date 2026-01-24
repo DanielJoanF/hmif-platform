@@ -1,23 +1,25 @@
-const STORAGE_KEY = 'hmif_forum_messages';
+import { apiService } from './apiService';
 
-export const getForumMessages = () => {
-    const data = localStorage.getItem(STORAGE_KEY);
-    return data ? JSON.parse(data) : [];
+export const getForumMessages = async () => {
+    try {
+        const messages = await apiService.get('/forum');
+        return messages;
+    } catch (error) {
+        console.error('Failed to fetch forum messages:', error);
+        return [];
+    }
 };
 
-export const postForumMessage = (username, text) => {
-    const messages = getForumMessages();
-    const newMessage = {
-        id: Date.now(),
-        username: username || 'Anonymous',
-        text,
-        timestamp: new Date().toISOString(),
-    };
-    const updatedMessages = [...messages, newMessage];
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(updatedMessages));
-    return newMessage;
+export const postForumMessage = async (username, text) => {
+    try {
+        const newMessage = await apiService.post('/forum', {
+            username: username || 'Anonymous',
+            text
+        });
+        return newMessage;
+    } catch (error) {
+        console.error('Failed to post forum message:', error);
+        throw error;
+    }
 };
 
-export const clearForum = () => {
-    localStorage.removeItem(STORAGE_KEY);
-};

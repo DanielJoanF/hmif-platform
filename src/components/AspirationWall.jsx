@@ -1,13 +1,62 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { apiService } from '../services/apiService';
 import styles from './AspirationWall.module.css';
 
 const AspirationWall = () => {
-    const [aspirations, setAspirations] = useState([
-        { id: 1, tag: 'Akademik', text: 'Butuh lebih banyak workshop tentang AI dan Data Science!', date: '2 hari lalu' },
-        { id: 2, tag: 'Fasilitas', text: 'WiFi di ruang mahasiswa perlu ditingkatkan.', date: '5 hari lalu' },
-        { id: 3, tag: 'Kegiatan', text: 'Bisa adakan hackathon semester depan?', date: '1 minggu lalu' },
-        { id: 4, tag: 'Umum', text: 'Suka banget desain merchandise barunya!', date: '1 minggu lalu' },
-    ]);
+    const [aspirations, setAspirations] = useState([]);
+    const [newAspiration, setNewAspiration] = useState('');
+    const [selectedTag, setSelectedTag] = useState('Umum');
+    const [isSubmitting, setIsSubmitting] = useState(false);
+
+    useEffect(() => {
+        fetchAspirations();
+    }, []);
+
+    const fetchAspirations = async () => {
+        try {
+            const data = await apiService.get('/aspirations');
+            setAspirations(data);
+        } catch (error) {
+            console.error('Failed to fetch aspirations:', error);
+        }
+    };
+
+    const handleSubmit = async () => {
+        if (!newAspiration.trim()) {
+            alert('Tolong tulis aspirasimu!');
+            return;
+        }
+
+        setIsSubmitting(true);
+        try {
+            const savedAspiration = await apiService.post('/aspirations', {
+                tag: selectedTag,
+                text: newAspiration.trim()
+            });
+            setAspirations(prev => [savedAspiration, ...prev]);
+            setNewAspiration('');
+            setSelectedTag('Umum');
+            alert('Aspirasi berhasil dikirim! 🎉');
+        } catch (error) {
+            console.error('Failed to submit aspiration:', error);
+            alert('Gagal mengirim aspirasi. Pastikan server backend berjalan.');
+        } finally {
+            setIsSubmitting(false);
+        }
+    };
+
+    const formatDate = (dateString) => {
+        const date = new Date(dateString);
+        const now = new Date();
+        const diffMs = now - date;
+        const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+
+        if (diffDays === 0) return 'Hari ini';
+        if (diffDays === 1) return 'Kemarin';
+        if (diffDays < 7) return `${diffDays} hari lalu`;
+        if (diffDays < 30) return `${Math.floor(diffDays / 7)} minggu lalu`;
+        return `${Math.floor(diffDays / 30)} bulan lalu`;
+    };
 
     return (
         <div className={styles.wallContainer}>
@@ -21,15 +70,27 @@ const AspirationWall = () => {
                         placeholder="Apa yang ada di pikiranmu?"
                         className={styles.textarea}
                         rows="3"
+                        value={newAspiration}
+                        onChange={(e) => setNewAspiration(e.target.value)}
                     ></textarea>
                     <div className={styles.formFooter}>
-                        <select className={styles.select}>
+                        <select
+                            className={styles.select}
+                            value={selectedTag}
+                            onChange={(e) => setSelectedTag(e.target.value)}
+                        >
                             <option>Umum</option>
                             <option>Akademik</option>
                             <option>Fasilitas</option>
                             <option>Kegiatan</option>
                         </select>
-                        <button className={styles.submitBtn}>Kirim Aspirasi</button>
+                        <button
+                            className={styles.submitBtn}
+                            onClick={handleSubmit}
+                            disabled={isSubmitting}
+                        >
+                            {isSubmitting ? 'Mengirim...' : 'Kirim Aspirasi'}
+                        </button>
                     </div>
                 </div>
             </div>
@@ -37,18 +98,21 @@ const AspirationWall = () => {
             {/* Grid Section */}
             <div className={styles.grid}>
                 {aspirations.map((item) => (
-                    <div key={item.id} className={`${styles.card} glass-panel`}>
+                    <div key={item._id} className={`${styles.card} glass-panel`}>
                         <div className={styles.cardHeader}>
                             <span className={styles.tag}>{item.tag}</span>
-                            <span className={styles.date}>{item.date}</span>
+                            <span className={styles.date}>{formatDate(item.createdAt)}</span>
                         </div>
                         <p className={styles.cardText}>"{item.text}"</p>
                     </div>
                 ))}
-                {/* Decorative placeholders to make it look full */}
-                <div className={`${styles.card} glass-panel`} style={{ opacity: 0.5 }}>
-                    <p className={styles.cardText} style={{ fontStyle: 'italic' }}>...</p>
-                </div>
+                {aspirations.length === 0 && (
+                    <div className={`${styles.card} glass-panel`} style={{ opacity: 0.5 }}>
+                        <p className={styles.cardText} style={{ fontStyle: 'italic' }}>
+                            Belum ada aspirasi. Jadilah yang pertama! 🚀
+                        </p>
+                    </div>
+                )}
             </div>
         </div>
     );
