@@ -39,11 +39,13 @@ const forumRoutes = require('./routes/forumRoutes');
 const aspirationRoutes = require('./routes/aspirationRoutes');
 const documentationRoutes = require('./routes/documentationRoutes');
 const chatbotRoutes = require('./routes/chatbotRoutes');
+const adminRoutes = require('./routes/adminRoutes');
 
 app.use('/api/forum', forumRoutes);
 app.use('/api/aspirations', aspirationRoutes);
 app.use('/api/documentation', documentationRoutes);
 app.use('/api/chatbot', chatbotRoutes);
+app.use('/api/admin', adminRoutes);
 
 // Health check endpoint
 app.get('/api/health', (req, res) => {

@@ -4,14 +4,7 @@ import styles from './Events.module.css';
 
 const Events = () => {
     const [documentation, setDocumentation] = useState([]);
-    const [showUploadForm, setShowUploadForm] = useState(false);
     const [selectedImage, setSelectedImage] = useState(null);
-    const [uploadData, setUploadData] = useState({
-        title: '',
-        caption: '',
-        image: null
-    });
-    const [isUploading, setIsUploading] = useState(false);
 
     useEffect(() => {
         fetchDocumentation();
@@ -26,41 +19,6 @@ const Events = () => {
         }
     };
 
-    const handleFileChange = (e) => {
-        const file = e.target.files[0];
-        if (file) {
-            setUploadData(prev => ({ ...prev, image: file }));
-        }
-    };
-
-    const handleUpload = async (e) => {
-        e.preventDefault();
-
-        if (!uploadData.title.trim() || !uploadData.image) {
-            alert('Judul dan foto harus diisi!');
-            return;
-        }
-
-        const formData = new FormData();
-        formData.append('title', uploadData.title.trim());
-        formData.append('caption', uploadData.caption.trim());
-        formData.append('image', uploadData.image);
-
-        setIsUploading(true);
-        try {
-            const newDoc = await apiService.postFormData('/documentation', formData);
-            setDocumentation(prev => [newDoc, ...prev]);
-            setUploadData({ title: '', caption: '', image: null });
-            setShowUploadForm(false);
-            alert('Dokumentasi berhasil diupload! 📸');
-        } catch (error) {
-            console.error('Failed to upload documentation:', error);
-            alert('Gagal mengupload. Pastikan server backend berjalan.');
-        } finally {
-            setIsUploading(false);
-        }
-    };
-
     return (
         <div className="container" style={{ paddingTop: '100px', paddingBottom: '100px' }}>
             <div style={{ marginBottom: '40px', textAlign: 'center' }}>
@@ -68,104 +26,7 @@ const Events = () => {
                 <p style={{ color: 'var(--text-muted)', fontSize: '1.1rem', marginTop: '1rem' }}>
                     Dokumentasi kegiatan dan momen berharga HMIF
                 </p>
-                <button
-                    onClick={() => setShowUploadForm(!showUploadForm)}
-                    style={{
-                        marginTop: '20px',
-                        padding: '12px 24px',
-                        background: 'var(--accent-primary)',
-                        border: 'none',
-                        borderRadius: '8px',
-                        color: 'white',
-                        cursor: 'pointer',
-                        fontSize: '1rem',
-                        fontWeight: '600'
-                    }}
-                >
-                    {showUploadForm ? '❌ Tutup Form' : '📤 Upload Dokumentasi'}
-                </button>
             </div>
-
-            {/* Upload Form */}
-            {showUploadForm && (
-                <div className="glass-panel" style={{ padding: '30px', marginBottom: '40px', maxWidth: '600px', margin: '0 auto 40px' }}>
-                    <h2 style={{ marginBottom: '20px' }}>Upload Dokumentasi</h2>
-                    <form onSubmit={handleUpload}>
-                        <div style={{ marginBottom: '15px' }}>
-                            <label style={{ display: 'block', marginBottom: '8px', fontWeight: '500' }}>Judul *</label>
-                            <input
-                                type="text"
-                                value={uploadData.title}
-                                onChange={(e) => setUploadData(prev => ({ ...prev, title: e.target.value }))}
-                                placeholder="Contoh: Workshop AI 2024"
-                                style={{
-                                    width: '100%',
-                                    padding: '12px',
-                                    borderRadius: '8px',
-                                    border: '1px solid rgba(255,255,255,0.1)',
-                                    background: 'rgba(255,255,255,0.05)',
-                                    color: 'var(--text-primary)',
-                                    fontSize: '1rem'
-                                }}
-                            />
-                        </div>
-                        <div style={{ marginBottom: '15px' }}>
-                            <label style={{ display: 'block', marginBottom: '8px', fontWeight: '500' }}>Caption</label>
-                            <textarea
-                                value={uploadData.caption}
-                                onChange={(e) => setUploadData(prev => ({ ...prev, caption: e.target.value }))}
-                                placeholder="Deskripsi singkat tentang foto ini..."
-                                rows="3"
-                                style={{
-                                    width: '100%',
-                                    padding: '12px',
-                                    borderRadius: '8px',
-                                    border: '1px solid rgba(255,255,255,0.1)',
-                                    background: 'rgba(255,255,255,0.05)',
-                                    color: 'var(--text-primary)',
-                                    fontSize: '1rem',
-                                    resize: 'vertical'
-                                }}
-                            />
-                        </div>
-                        <div style={{ marginBottom: '20px' }}>
-                            <label style={{ display: 'block', marginBottom: '8px', fontWeight: '500' }}>Foto *</label>
-                            <input
-                                type="file"
-                                accept="image/*"
-                                onChange={handleFileChange}
-                                style={{
-                                    width: '100%',
-                                    padding: '12px',
-                                    borderRadius: '8px',
-                                    border: '1px solid rgba(255,255,255,0.1)',
-                                    background: 'rgba(255,255,255,0.05)',
-                                    color: 'var(--text-primary)',
-                                    fontSize: '1rem'
-                                }}
-                            />
-                        </div>
-                        <button
-                            type="submit"
-                            disabled={isUploading}
-                            style={{
-                                width: '100%',
-                                padding: '14px',
-                                background: 'var(--accent-primary)',
-                                border: 'none',
-                                borderRadius: '8px',
-                                color: 'white',
-                                cursor: isUploading ? 'not-allowed' : 'pointer',
-                                fontSize: '1rem',
-                                fontWeight: '600',
-                                opacity: isUploading ? 0.6 : 1
-                            }}
-                        >
-                            {isUploading ? 'Mengupload...' : 'Upload'}
-                        </button>
-                    </form>
-                </div>
-            )}
 
             {/* Gallery Grid */}
             <div style={{
@@ -216,10 +77,10 @@ const Events = () => {
                 ))}
             </div>
 
-            {documentation.length === 0 && !showUploadForm && (
+            {documentation.length === 0 && (
                 <div style={{ textAlign: 'center', marginTop: '60px' }}>
                     <p style={{ fontSize: '1.2rem', color: 'var(--text-muted)' }}>
-                        Belum ada dokumentasi. Upload yang pertama! 📸
+                        Belum ada dokumentasi kegiatan 📸
                     </p>
                 </div>
             )}
@@ -284,3 +145,4 @@ const Events = () => {
 };
 
 export default Events;
+
