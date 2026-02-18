@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { apiService } from '../services/apiService';
-import styles from './Events.module.css';
+import './Events.css';
 
 const Events = () => {
     const [documentation, setDocumentation] = useState([]);
@@ -20,126 +20,95 @@ const Events = () => {
     };
 
     return (
-        <div className="container" style={{ paddingTop: '100px', paddingBottom: '100px' }}>
-            <div style={{ marginBottom: '40px', textAlign: 'center' }}>
-                <h1 className="gradient-text" style={{ fontSize: '3rem' }}>Kegiatan & Galeri</h1>
-                <p style={{ color: 'var(--text-muted)', fontSize: '1.1rem', marginTop: '1rem' }}>
-                    Dokumentasi kegiatan dan momen berharga HMIF
-                </p>
-            </div>
+        <div className="events-page">
+            {/* Background Decoration */}
+            <div className="event-bg"></div>
 
-            {/* Gallery Grid */}
-            <div style={{
-                display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
-                gap: '24px',
-                marginTop: '40px'
-            }}>
-                {documentation.map((doc) => (
-                    <div
-                        key={doc._id}
-                        className="glass-panel"
-                        style={{
-                            overflow: 'hidden',
-                            cursor: 'pointer',
-                            transition: 'transform 0.3s ease'
-                        }}
-                        onClick={() => setSelectedImage(doc)}
-                        onMouseEnter={(e) => e.currentTarget.style.transform = 'translateY(-8px)'}
-                        onMouseLeave={(e) => e.currentTarget.style.transform = 'translateY(0)'}
-                    >
-                        <img
-                            src={`http://localhost:5000${doc.imageUrl}`}
-                            alt={doc.title}
-                            style={{
-                                width: '100%',
-                                height: '250px',
-                                objectFit: 'cover',
-                                borderRadius: '8px 8px 0 0'
-                            }}
-                        />
-                        <div style={{ padding: '20px' }}>
-                            <h3 style={{ marginBottom: '8px', fontSize: '1.2rem' }}>{doc.title}</h3>
-                            {doc.caption && (
-                                <p style={{ color: 'var(--text-muted)', fontSize: '0.95rem' }}>
-                                    {doc.caption}
-                                </p>
-                            )}
-                            <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem', marginTop: '8px' }}>
-                                {new Date(doc.uploadedAt).toLocaleDateString('id-ID', {
-                                    day: 'numeric',
-                                    month: 'long',
-                                    year: 'numeric'
-                                })}
-                            </p>
-                        </div>
-                    </div>
-                ))}
-            </div>
-
-            {documentation.length === 0 && (
-                <div style={{ textAlign: 'center', marginTop: '60px' }}>
-                    <p style={{ fontSize: '1.2rem', color: 'var(--text-muted)' }}>
-                        Belum ada dokumentasi kegiatan 📸
+            <div className="container">
+                <div className="events-header">
+                    <h1 className="page-title">KEGIATAN &<br />DOKUMENTASI</h1>
+                    <p className="page-subtitle">
+                        Agenda terbaru dan galeri eksklusif HMIF USD.
                     </p>
                 </div>
-            )}
 
-            {/* Image Preview Modal */}
-            {selectedImage && (
-                <div
-                    style={{
-                        position: 'fixed',
-                        top: 0,
-                        left: 0,
-                        right: 0,
-                        bottom: 0,
-                        background: 'rgba(0,0,0,0.9)',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        zIndex: 9999,
-                        padding: '20px'
-                    }}
-                    onClick={() => setSelectedImage(null)}
-                >
-                    <div style={{ maxWidth: '90%', maxHeight: '90%', textAlign: 'center' }}>
-                        <img
-                            src={`http://localhost:5000${selectedImage.imageUrl}`}
-                            alt={selectedImage.title}
-                            style={{
-                                maxWidth: '100%',
-                                maxHeight: '80vh',
-                                borderRadius: '12px'
-                            }}
-                        />
-                        <h2 style={{ marginTop: '20px', color: 'white' }}>{selectedImage.title}</h2>
-                        {selectedImage.caption && (
-                            <p style={{ marginTop: '10px', color: 'rgba(255,255,255,0.8)' }}>
-                                {selectedImage.caption}
-                            </p>
-                        )}
-                        <button
-                            onClick={(e) => {
-                                e.stopPropagation();
-                                setSelectedImage(null);
-                            }}
-                            style={{
-                                marginTop: '20px',
-                                padding: '10px 24px',
-                                background: 'white',
-                                border: 'none',
-                                borderRadius: '8px',
-                                cursor: 'pointer',
-                                fontSize: '1rem',
-                                fontWeight: '600'
-                            }}
+                {/* Horizontal Scroll List */}
+                <div className="gallery-list">
+                    {documentation.map((doc) => (
+                        <div
+                            key={doc._id}
+                            className="gallery-card"
+                            onClick={() => setSelectedImage(doc)}
                         >
-                            Tutup
-                        </button>
-                    </div>
+                            {/* Image as Background */}
+                            <img
+                                src={`http://localhost:5000${doc.imageUrl}`}
+                                alt={doc.title}
+                                className="card-bg-image"
+                            />
+
+                            <div className="card-content">
+                                <div className="card-date">
+                                    {new Date(doc.uploadedAt).toLocaleDateString('id-ID', {
+                                        day: '2-digit',
+                                        month: '2-digit'
+                                    }).replace('/', '.')}
+                                </div>
+                                <h3 className="card-title">{doc.title}</h3>
+                                {doc.caption && (
+                                    <p className="card-caption">{doc.caption}</p>
+                                )}
+                                <div className="view-btn">LIHAT DETAIL &rarr;</div>
+                            </div>
+                        </div>
+                    ))}
+
+                    {documentation.length === 0 && (
+                        <div className="empty-state" style={{ color: '#666', padding: '2rem' }}>
+                            <p>BELUM ADA DATA KEGIATAN</p>
+                        </div>
+                    )}
                 </div>
-            )}
+
+                {/* Image Preview Modal */}
+                {selectedImage && (
+                    <div
+                        className="modal-overlay"
+                        onClick={() => setSelectedImage(null)}
+                    >
+                        <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+                            <button
+                                className="modal-close-btn"
+                                onClick={() => setSelectedImage(null)}
+                            >
+                                X
+                            </button>
+
+                            <div className="modal-image-container">
+                                <img
+                                    src={`http://localhost:5000${selectedImage.imageUrl}`}
+                                    alt={selectedImage.title}
+                                    className="modal-image"
+                                />
+                            </div>
+
+                            <div className="modal-info">
+                                <h2 className="modal-title">{selectedImage.title}</h2>
+                                {selectedImage.caption && (
+                                    <p style={{ color: '#ccc', lineHeight: '1.6' }}>{selectedImage.caption}</p>
+                                )}
+                                <p style={{ color: '#666', marginTop: '1rem', fontSize: '0.9rem' }}>
+                                    Diunggah pada: {new Date(selectedImage.uploadedAt).toLocaleDateString('id-ID', {
+                                        day: 'numeric',
+                                        month: 'long',
+                                        year: 'numeric'
+                                    })}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                )}
+            </div>
         </div>
     );
 };

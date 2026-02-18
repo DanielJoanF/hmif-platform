@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { apiService } from '../services/apiService';
-import styles from './AspirationWall.module.css';
+import '../pages/Aspirations.css'; // Import the new CSS
 
 const AspirationWall = () => {
     const [aspirations, setAspirations] = useState([]);
@@ -47,72 +47,72 @@ const AspirationWall = () => {
 
     const formatDate = (dateString) => {
         const date = new Date(dateString);
-        const now = new Date();
-        const diffMs = now - date;
-        const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
-
-        if (diffDays === 0) return 'Hari ini';
-        if (diffDays === 1) return 'Kemarin';
-        if (diffDays < 7) return `${diffDays} hari lalu`;
-        if (diffDays < 30) return `${Math.floor(diffDays / 7)} minggu lalu`;
-        return `${Math.floor(diffDays / 30)} bulan lalu`;
+        return date.toLocaleDateString('id-ID', { day: 'numeric', month: 'short' });
     };
 
     return (
-        <div className={styles.wallContainer}>
-            {/* Submission Section */}
-            <div className={styles.inputSection}>
-                <h2 className="gradient-text">Sampaikan Suaramu</h2>
-                <p className={styles.subtitle}>Masukan kamu membentuk masa depan kita. Bisa anonim atau dengan nama.</p>
+        <div className="aspiration-page">
+            <div className="aspiration-container">
 
-                <div className={`glass-panel ${styles.formCard}`}>
-                    <textarea
-                        placeholder="Apa yang ada di pikiranmu?"
-                        className={styles.textarea}
-                        rows="3"
-                        value={newAspiration}
-                        onChange={(e) => setNewAspiration(e.target.value)}
-                    ></textarea>
-                    <div className={styles.formFooter}>
-                        <select
-                            className={styles.select}
-                            value={selectedTag}
-                            onChange={(e) => setSelectedTag(e.target.value)}
-                        >
-                            <option>Umum</option>
-                            <option>Akademik</option>
-                            <option>Fasilitas</option>
-                            <option>Kegiatan</option>
-                        </select>
-                        <button
-                            className={styles.submitBtn}
-                            onClick={handleSubmit}
-                            disabled={isSubmitting}
-                        >
-                            {isSubmitting ? 'Mengirim...' : 'Kirim Aspirasi'}
-                        </button>
+                {/* Form Section */}
+                <div className="form-section">
+                    <h1 className="form-title">SUARAKAN<br />ASPIRASIMU</h1>
+                    <p className="form-subtitle">Ide, kritik, dan saran untuk HMIF yang lebih baik.</p>
+
+                    <div className="input-group">
+                        <textarea
+                            className="main-input"
+                            placeholder="Ketik di sini..."
+                            value={newAspiration}
+                            onChange={(e) => setNewAspiration(e.target.value)}
+                            rows={1}
+                            style={{ height: newAspiration ? 'auto' : '60px' }} // Auto-grow feel
+                        />
+
+                        {/* Controls appear when interacting */}
+                        <div className={`form-controls ${newAspiration ? 'active' : ''}`}>
+                            <select
+                                className="tag-select"
+                                value={selectedTag}
+                                onChange={(e) => setSelectedTag(e.target.value)}
+                            >
+                                <option>Umum</option>
+                                <option>Akademik</option>
+                                <option>Fasilitas</option>
+                                <option>Kegiatan</option>
+                            </select>
+
+                            <button
+                                className="submit-btn-minimal"
+                                onClick={handleSubmit}
+                                disabled={isSubmitting}
+                            >
+                                {isSubmitting ? '...' : 'KIRIM'}
+                            </button>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            {/* Grid Section */}
-            <div className={styles.grid}>
-                {aspirations.map((item) => (
-                    <div key={item._id} className={`${styles.card} glass-panel`}>
-                        <div className={styles.cardHeader}>
-                            <span className={styles.tag}>{item.tag}</span>
-                            <span className={styles.date}>{formatDate(item.createdAt)}</span>
+                {/* Wall Grid */}
+                <div className="wall-grid">
+                    {aspirations.map((item) => (
+                        <div key={item._id} className="aspiration-card">
+                            <div className="quote-icon">"</div>
+                            <div className="card-header">
+                                <span className="card-tag">{item.tag}</span>
+                                <span className="card-date">{formatDate(item.createdAt)}</span>
+                            </div>
+                            <p className="card-text">{item.text}</p>
                         </div>
-                        <p className={styles.cardText}>"{item.text}"</p>
-                    </div>
-                ))}
-                {aspirations.length === 0 && (
-                    <div className={`${styles.card} glass-panel`} style={{ opacity: 0.5 }}>
-                        <p className={styles.cardText} style={{ fontStyle: 'italic' }}>
-                            Belum ada aspirasi. Jadilah yang pertama! 🚀
-                        </p>
-                    </div>
-                )}
+                    ))}
+
+                    {aspirations.length === 0 && (
+                        <div style={{ gridColumn: '1/-1', textAlign: 'center', color: '#444', marginTop: '2rem' }}>
+                            <p>BELUM ADA DATA ASPIRASI</p>
+                        </div>
+                    )}
+                </div>
+
             </div>
         </div>
     );

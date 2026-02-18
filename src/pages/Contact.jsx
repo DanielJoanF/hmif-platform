@@ -1,24 +1,46 @@
+import React from 'react';
+import './Contact.css';
+import logo from '../assets/logo.png';
+
 const Contact = () => {
     return (
-        <div className="container" style={{ paddingTop: '100px', paddingBottom: '100px' }}>
-            <h1 className="gradient-text" style={{ fontSize: '3rem', marginBottom: '2rem' }}>Hubungi Kami</h1>
-            <p style={{ fontSize: '1.2rem', color: 'var(--text-muted)', marginBottom: '3rem' }}>
-                Punya pertanyaan atau ingin berkolaborasi? Jangan ragu untuk menghubungi kami!
-            </p>
+        <div className="contact-page">
+            <div className="contact-grid">
 
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '24px', maxWidth: '800px' }}>
-                <div className="glass-panel" style={{ padding: '24px', textAlign: 'center' }}>
-                    <h3 style={{ color: 'var(--primary)', marginBottom: '12px' }}>📧 Email</h3>
-                    <p style={{ color: 'var(--text-muted)' }}>hmif@usd.ac.id</p>
+                {/* Left: Info */}
+                <div className="contact-info">
+                    {/* Header Text from Original */}
+                    <div style={{ marginBottom: '3rem' }}>
+                        <h1 className="text-display" style={{ fontSize: '3rem', marginBottom: '1rem' }}>HUBUNGI KAMI</h1>
+                        <p style={{ color: '#888', maxWidth: '400px' }}>
+                            Punya pertanyaan atau ingin berkolaborasi? Jangan ragu untuk menghubungi kami!
+                        </p>
+                    </div>
+
+                    <div className="contact-block">
+                        <span className="label">EMAIL OFFICIAL</span>
+                        <a href="mailto:hmif@usd.ac.id" className="contact-link text-display">hmif@usd.ac.id</a>
+                    </div>
+
+                    <div className="contact-block">
+                        <span className="label">MARKAS KAMI</span>
+                        <p className="address">
+                            Kampus III USD, Paingan,<br />
+                            Yogyakarta, Indonesia
+                        </p>
+                    </div>
+
+                    <div className="socials">
+                        <span className="label" style={{ marginRight: '1rem', alignSelf: 'center', marginBottom: 0 }}>MEDIA SOSIAL:</span>
+                        <a href="https://instagram.com/hmif.usd" target="_blank" rel="noopener noreferrer">@hmif.usd</a>
+                    </div>
                 </div>
-                <div className="glass-panel" style={{ padding: '24px', textAlign: 'center' }}>
-                    <h3 style={{ color: 'var(--primary)', marginBottom: '12px' }}>📍 Lokasi</h3>
-                    <p style={{ color: 'var(--text-muted)' }}>Kampus III USD, Paingan, Yogyakarta</p>
+
+                {/* Right: Visual */}
+                <div className="contact-visual">
+                    <img src={logo} alt="HMIF Logo Art" />
                 </div>
-                <div className="glass-panel" style={{ padding: '24px', textAlign: 'center' }}>
-                    <h3 style={{ color: 'var(--primary)', marginBottom: '12px' }}>📱 Instagram</h3>
-                    <p style={{ color: 'var(--text-muted)' }}>@hmif.usd</p>
-                </div>
+
             </div>
         </div>
     );
