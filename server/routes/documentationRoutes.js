@@ -7,7 +7,8 @@ const Documentation = require('../models/Documentation');
 // Configure multer for file upload
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, 'uploads/');
+        // Use absolute path to the uploads directory in the project root
+        cb(null, path.join(__dirname, '../../uploads'));
     },
     filename: (req, file, cb) => {
         const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);

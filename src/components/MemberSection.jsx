@@ -34,30 +34,33 @@ const MemberSection = () => {
 
     return (
         <section className={styles.section}>
-            <h2 className={`gradient-text ${styles.title}`}>{hmifMembers.title}</h2>
+            <h2 className={styles.title}>{hmifMembers.title}</h2>
 
             {/* BPH Section - Org Chart Style */}
             <div className={styles.bphSection}>
                 <h3 className={styles.sectionTitle}>Badan Pengurus Harian</h3>
 
-                {/* Top Row - Ketua */}
+                {/* Top Row - Ketua & Wakil */}
                 <div className={styles.orgLevel}>
-                    <MemberCard {...hmifMembers.bph[0]} isLeader onPhotoClick={openPreview} />
+                    <MemberCard {...hmifMembers.bph[0]} onPhotoClick={openPreview} />
+                    <MemberCard {...hmifMembers.bph[1]} onPhotoClick={openPreview} />
                 </div>
 
                 {/* Connector Line */}
                 <div className={styles.connector}></div>
 
-                {/* Second Row - Wakil, Sekretaris, Bendahara */}
+                {/* Second Row - Sekretaris, Bendahara */}
                 <div className={styles.orgLevel}>
-                    {hmifMembers.bph.slice(1).map((member, idx) => (
+                    {hmifMembers.bph.slice(2).map((member, idx) => (
                         <MemberCard key={idx} {...member} onPhotoClick={openPreview} />
                     ))}
                 </div>
             </div>
 
             {/* Divisions Grid - Organized */}
-            <h3 className={styles.sectionTitle} style={{ marginTop: '4rem' }}>Divisi-Divisi</h3>
+            <div style={{ textAlign: 'center', marginTop: '4rem' }}>
+                <h3 className={styles.sectionTitle}>Divisi-Divisi</h3>
+            </div>
             <div className={styles.divisionsContainer}>
                 {hmifMembers.divisions.map((division, idx) => (
                     <div key={idx} className={styles.divisionBox}>

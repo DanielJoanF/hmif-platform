@@ -1,5 +1,5 @@
 import React from 'react';
-import FAQSection from '../components/FAQSection';
+
 import MemberSection from '../components/MemberSection';
 import './About.css';
 import logo from '../assets/logo.png';
@@ -47,7 +47,7 @@ const About = () => {
                 {/* Existing Sections */}
                 <div className="sections-wrapper">
                     <MemberSection />
-                    <FAQSection />
+
                 </div>
 
             </div>

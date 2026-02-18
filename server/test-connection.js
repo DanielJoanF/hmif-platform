@@ -8,18 +8,18 @@ console.log('MongoDB URI:', process.env.MONGODB_URI ? 'Found (hidden for securit
 console.log('Port:', process.env.PORT);
 
 if (!process.env.MONGODB_URI) {
-    console.error('❌ ERROR: MONGODB_URI is not defined in .env file');
+    console.error('ERROR: MONGODB_URI is not defined in .env file');
     process.exit(1);
 }
 
 mongoose.connect(process.env.MONGODB_URI)
     .then(() => {
-        console.log('✅ MongoDB Connected Successfully!');
+        console.log('MongoDB Connected Successfully!');
         console.log('Connection state:', mongoose.connection.readyState);
         process.exit(0);
     })
     .catch((error) => {
-        console.error('❌ MongoDB Connection Failed:');
+        console.error('MongoDB Connection Failed:');
         console.error('Error:', error.message);
         console.error('\nPossible issues:');
         console.error('1. Check if password is correct');
