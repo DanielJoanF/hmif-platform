@@ -1,6 +1,6 @@
 import React from 'react';
 import './Contact.css';
-import logo from '../assets/logo.png';
+import logo from '../assets/default-member.jpg';
 
 const Contact = () => {
     return (
@@ -19,7 +19,7 @@ const Contact = () => {
 
                     <div className="contact-block">
                         <span className="label">EMAIL OFFICIAL</span>
-                        <a href="mailto:hmif@usd.ac.id" className="contact-link text-display">hmif@usd.ac.id</a>
+                        <a href="mailto:hmjtisanatadharma@gmail.com" className="contact-link text-display">hmjtisanatadharma@gmail.com</a>
                     </div>
 
                     <div className="contact-block">

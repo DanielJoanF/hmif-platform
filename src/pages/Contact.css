@@ -44,7 +44,7 @@
 }
 
 .contact-link {
-    font-size: clamp(2rem, 4vw, 4rem);
+    font-size: clamp(2rem, 3vw, 3rem);
     color: #fff;
     transition: color 0.3s ease;
     font-weight: 700;

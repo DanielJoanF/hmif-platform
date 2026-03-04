@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { sendMessageToGemini } from '../services/geminiService';
+import { sendMessageToChatbot } from '../services/chatbotService';
 import { getForumMessages, postForumMessage } from '../services/forumService';
 import { apiService } from '../services/apiService';
 import styles from './ChatWidget.module.css';
@@ -49,7 +49,7 @@ const ChatWidget = () => {
       await apiService.post('/chatbot', { sender: 'user', text: userInputText });
 
       const history = botMessages.filter(m => m.sender !== 'bot' || m.id !== 1);
-      const response = await sendMessageToGemini(history, userInputText);
+      const response = await sendMessageToChatbot(history, userInputText);
 
       const botMessage = { id: Date.now() + 1, sender: 'bot', text: response };
       setBotMessages(prev => [...prev, botMessage]);

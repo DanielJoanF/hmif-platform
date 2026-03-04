@@ -59,7 +59,7 @@ const AdminLogin = () => {
                     </button>
                 </form>
 
-                <p className={styles.hint}>Default password: admin123</p>
+                <p className={styles.hint}>123</p>
             </div>
         </div>
     );

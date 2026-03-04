@@ -1,19 +1,30 @@
 import defaultPhoto from '../assets/default-member.jpg';
+import tio from '../assets/tio.jpeg';
+import tumba from '../assets/tumba.jpeg';
+import vhean from '../assets/vhean.jpeg';
+import vinda from '../assets/vinda.jpeg';
+import paskal from '../assets/paskal.jpeg';
+import nava from '../assets/nava.jpeg';
+import rachel from '../assets/rachel.jpeg';
+import yoas from '../assets/yoas.jpeg';
+import regis from '../assets/regis.jpeg';
+import max from '../assets/max.jpeg';
+import jodi from '../assets/jodi.jpeg';
 
 export const hmifMembers = {
     title: "PENGURUS HMIF 2025/2026",
     bph: [
-        { jabatan: "Ketua", nama: "Tio Alan Kurniawan", foto: defaultPhoto },
-        { jabatan: "Wakil Ketua", nama: "Tumba TL.Sihombing", foto: defaultPhoto },
-        { jabatan: "Sekretaris", nama: "Advhenita Destriana Wiwonto", foto: defaultPhoto },
-        { jabatan: "Bendahara", nama: "Elvinda Kenia Tri Prastika", foto: defaultPhoto },
+        { jabatan: "Ketua", nama: "Tio Alan Kurniawan", foto: tio },
+        { jabatan: "Wakil Ketua", nama: "Tumba TL.Sihombing", foto: tumba },
+        { jabatan: "Sekretaris", nama: "Advhenita Destriana Wiwonto", foto: vhean },
+        { jabatan: "Bendahara", nama: "Elvinda Kenia Tri Prastika", foto: vinda },
     ],
     divisions: [
         {
             name: "Divisi Minat & Bakat",
-            coordinator: { nama: "Pebrianus Regis Sabomban", foto: defaultPhoto },
+            coordinator: { nama: "Pebrianus Regis Sabomban", foto: regis },
             members: [
-                { nama: "Jodi Saputra Sitanggang", foto: defaultPhoto },
+                { nama: "Jodi Saputra Sitanggang", foto: jodi },
                 { nama: "Burju Efraim Purba", foto: defaultPhoto },
                 { nama: "Felicia Anggun Devika", foto: defaultPhoto },
                 { nama: "Virly Setyo Eka Andrian", foto: defaultPhoto },
@@ -23,7 +34,7 @@ export const hmifMembers = {
         },
         {
             name: "Divisi Media Komunikasi & Informasi",
-            coordinator: { nama: "Thomas Paskal Eka Hari Murti", foto: defaultPhoto },
+            coordinator: { nama: "Thomas Paskal Eka Hari Murti", foto: paskal },
             members: [
                 { nama: "Yohana Sarnike Bulu", foto: defaultPhoto },
                 { nama: "Michael Gelar Swasana Jati", foto: defaultPhoto },
@@ -34,7 +45,7 @@ export const hmifMembers = {
         },
         {
             name: "Divisi Humas & Advokasi",
-            coordinator: { nama: "Yoas Flegon Angi Saputra", foto: defaultPhoto },
+            coordinator: { nama: "Yoas Flegon Angi Saputra", foto: yoas },
             members: [
                 { nama: "Gabriel Batista Bimantara Dumais", foto: defaultPhoto },
                 { nama: "Genoveva Anela Reva Putri Adipna", foto: defaultPhoto },
@@ -59,7 +70,7 @@ export const hmifMembers = {
         },
         {
             name: "Divisi PSDM",
-            coordinator: { nama: "Gabriella Nava Trivana Irianto", foto: defaultPhoto },
+            coordinator: { nama: "Gabriella Nava Trivana Irianto", foto: nava },
             members: [
                 { nama: "Bernardus Febrian", foto: defaultPhoto },
                 { nama: "Celsia Aprilia Timang", foto: defaultPhoto },
@@ -67,9 +78,9 @@ export const hmifMembers = {
         },
         {
             name: "Divisi Kewirausahaan",
-            coordinator: { nama: "Rachel Rambu Sedu Oyi", foto: defaultPhoto },
+            coordinator: { nama: "Rachel Rambu Sedu Oyi", foto: rachel },
             members: [
-                { nama: "Maximillianus Mahasmara", foto: defaultPhoto },
+                { nama: "Maximillianus Mahasmara", foto: max },
                 { nama: "Gabriela Angelina Olivia Hure", foto: defaultPhoto },
                 { nama: "Georgius Satria Putra Pamungkas", foto: defaultPhoto },
             ]
