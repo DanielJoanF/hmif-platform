@@ -60,7 +60,10 @@ const AdminGallery = () => {
         if (!confirm('Are you sure you want to delete this photo?')) return;
 
         try {
-            await apiService.post(`/admin/documentation/${id}`, {}, 'DELETE');
+            const response = await fetch(`http://localhost:5000/api/admin/documentation/${id}`, {
+                method: 'DELETE',
+            });
+            if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
             fetchDocs();
             alert('Photo deleted successfully!');
         } catch (error) {

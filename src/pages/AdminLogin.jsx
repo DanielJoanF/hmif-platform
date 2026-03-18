@@ -35,7 +35,7 @@ const AdminLogin = () => {
     return (
         <div className={styles.container}>
             <div className={styles.loginBox}>
-                <h1 className={styles.title}>🔐 Admin Login</h1>
+                <h1 className={styles.title}>Admin Login</h1>
                 <p className={styles.subtitle}>HMIF Platform Dashboard</p>
 
                 <form onSubmit={handleSubmit} className={styles.form}>
@@ -59,7 +59,6 @@ const AdminLogin = () => {
                     </button>
                 </form>
 
-                <p className={styles.hint}>123</p>
             </div>
         </div>
     );

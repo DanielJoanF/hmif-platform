@@ -48,33 +48,33 @@ const AdminDashboard = () => {
         <div className={styles.container}>
             <aside className={styles.sidebar}>
                 <div className={styles.logo}>
-                    <h2>🎯 HMIF Admin</h2>
+                    <h2>HMIF Admin</h2>
                 </div>
                 <nav className={styles.nav}>
                     <button className={styles.navItem + ' ' + styles.active}>
-                        📊 Dashboard
+                        Dashboard
                     </button>
                     <button
                         className={styles.navItem}
                         onClick={() => navigate('/admin-hmif-secret/gallery')}
                     >
-                        🖼️ Gallery
+                        Gallery
                     </button>
                     <button
                         className={styles.navItem}
                         onClick={() => navigate('/admin-hmif-secret/aspirations')}
                     >
-                        💬 Aspirations
+                        Aspirations
                     </button>
                     <button
                         className={styles.navItem}
                         onClick={() => navigate('/admin-hmif-secret/forum')}
                     >
-                        💭 Forum
+                        Forum
                     </button>
                 </nav>
                 <button className={styles.logoutBtn} onClick={handleLogout}>
-                    🚪 Logout
+                    Logout
                 </button>
             </aside>
 
@@ -82,13 +82,12 @@ const AdminDashboard = () => {
                 <header className={styles.header}>
                     <h1>Dashboard Overview</h1>
                     <button onClick={fetchStats} className={styles.refreshBtn}>
-                        🔄 Refresh
+                        Refresh
                     </button>
                 </header>
 
                 <div className={styles.statsGrid}>
                     <div className={styles.statCard}>
-                        <div className={styles.statIcon}>💬</div>
                         <div className={styles.statInfo}>
                             <p className={styles.statLabel}>Total Aspirasi</p>
                             <h2 className={styles.statValue}>{stats?.counts.aspirations || 0}</h2>
@@ -96,7 +95,6 @@ const AdminDashboard = () => {
                     </div>
 
                     <div className={styles.statCard}>
-                        <div className={styles.statIcon}>💭</div>
                         <div className={styles.statInfo}>
                             <p className={styles.statLabel}>Forum Messages</p>
                             <h2 className={styles.statValue}>{stats?.counts.forum || 0}</h2>
@@ -104,7 +102,6 @@ const AdminDashboard = () => {
                     </div>
 
                     <div className={styles.statCard}>
-                        <div className={styles.statIcon}>📸</div>
                         <div className={styles.statInfo}>
                             <p className={styles.statLabel}>Dokumentasi</p>
                             <h2 className={styles.statValue}>{stats?.counts.documentation || 0}</h2>
@@ -112,7 +109,6 @@ const AdminDashboard = () => {
                     </div>
 
                     <div className={styles.statCard}>
-                        <div className={styles.statIcon}>🤖</div>
                         <div className={styles.statInfo}>
                             <p className={styles.statLabel}>Chatbot Messages</p>
                             <h2 className={styles.statValue}>{stats?.counts.chatbot || 0}</h2>
@@ -140,10 +136,6 @@ const AdminDashboard = () => {
                         ) : (
                             stats?.recentActivity.map((activity, index) => (
                                 <div key={index} className={styles.activityItem}>
-                                    <span className={styles.activityIcon}>
-                                        {activity.action === 'created' ? '✅' :
-                                            activity.action === 'deleted' ? '❌' : '✏️'}
-                                    </span>
                                     <div className={styles.activityDetails}>
                                         <p className={styles.activityText}>
                                             <strong>{activity.action}</strong> in {activity.collection}

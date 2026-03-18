@@ -9,7 +9,7 @@ const fs = require('fs');
 const path = require('path');
 
 // Simple admin password - in production, use proper authentication
-const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'admin123';
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD;
 
 // Login endpoint
 router.post('/login', (req, res) => {

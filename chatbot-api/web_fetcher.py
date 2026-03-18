@@ -19,6 +19,7 @@ import cache
 URLS = {
     "usd_main": "https://www.usd.ac.id/",
     "usd_ti": "https://web.usd.ac.id/fakultas/sainsdanteknologi/ti/",
+    "usd_kalender": "https://www.usd.ac.id/kalender_akademik.php",
 }
 
 # Maximum characters of web content to send to the LLM
