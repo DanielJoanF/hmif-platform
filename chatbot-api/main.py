@@ -107,8 +107,12 @@ async def chat(request: ChatRequest):
         context_parts.append(f"=== Data Lokal (Knowledge Base) ===\n{local_ctx}")
         sources.append("knowledge_base")
 
-    # Add web content if intent is WEB or HYBRID, or if local found nothing
-    if intent in (router.Intent.WEB, router.Intent.HYBRID) or not context_parts:
+    # Add web content if:
+    # - Intent is explicitly WEB (dynamic info requested), OR
+    # - Intent is HYBRID but local KB found nothing (supplement with web)
+    # Skip web fetch if local KB already has data and intent is LOCAL or HYBRID
+    # This reduces noise from generic web pages polluting the LLM context.
+    if intent == router.Intent.WEB or (not context_parts):
         web_ctx = web_fetcher.fetch_all_sources()
         if web_ctx:
             context_parts.append(web_ctx)

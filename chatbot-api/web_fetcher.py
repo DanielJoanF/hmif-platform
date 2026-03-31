@@ -19,12 +19,13 @@ import cache
 URLS = {
     "usd_main": "https://www.usd.ac.id/",
     "usd_ti": "https://web.usd.ac.id/fakultas/sainsdanteknologi/ti/",
+    "usd_ti_pengumuman": "https://web.usd.ac.id/fakultas/sainsdanteknologi/ti/pengumuman",
     "usd_kalender": "https://www.usd.ac.id/kalender_akademik.php",
 }
 
 # Maximum characters of web content to send to the LLM
-# (prevents context overflow — ~4000 chars ≈ ~1000 tokens)
-MAX_CONTENT_LENGTH = 4000
+# (prevents context overflow — ~6000 chars ≈ ~1500 tokens)
+MAX_CONTENT_LENGTH = 6000
 
 # Request timeout in seconds
 REQUEST_TIMEOUT = 15
@@ -148,6 +149,14 @@ def fetch_all_sources() -> str:
     ti_content = fetch_usd_ti()
     if ti_content:
         parts.append(f"=== Sumber: Website Prodi TI USD ===\n{ti_content}")
+
+    ti_pengumuman_content = fetch_url(URLS["usd_ti_pengumuman"])
+    if ti_pengumuman_content:
+        parts.append(f"=== Sumber: Pengumuman Prodi TI USD ===\n{ti_pengumuman_content}")
+
+    kalender_content = fetch_url(URLS["usd_kalender"])
+    if kalender_content:
+        parts.append(f"=== Sumber: Kalender Akademik USD ===\n{kalender_content}")
 
     if not parts:
         return ""

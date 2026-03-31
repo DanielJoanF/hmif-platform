@@ -26,7 +26,7 @@ class Intent(str, Enum):
 LOCAL_KEYWORDS = [
     # Identitas & Profil
     "visi", "misi", "sejarah", "profile", "profil", "tentang",
-    "latar belakang", "tujuan", "filosofi",
+    "latar belakang", "tujuan", "filosofi", "sejarah", "berdiri",
     # Struktur organisasi
     "struktur", "organisasi", "divisi", "pengurus", "ketua",
     "wakil", "sekretaris", "bendahara", "anggota",
@@ -36,10 +36,10 @@ LOCAL_KEYWORDS = [
     "jurusan", "prodi", "program studi", "informatika",
     "gelar", "akreditasi", "sarjana",
     # HMIF specific
-    "hmif", "himpunan", "kaderisasi",
+    "hmif", "himpunan", "kaderisasi", "divisi", "anggota",
     # Umum statis
-    "alamat", "lokasi", "kampus", "kontak",
-    "syarat", "pendaftaran masuk", "biaya",
+    "alamat", "lokasi", "kampus", "kontak", "Sanata Dharma", "USD", "Universitas Sanata Dharma",
+    "syarat", "pendaftaran masuk", "biaya", "jurusan", "prodi", "program studi", "informatika", "teknik", "komputer",
 ]
 
 # Keywords that indicate the user is asking about DYNAMIC information
