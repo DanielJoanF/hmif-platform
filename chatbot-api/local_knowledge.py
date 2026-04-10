@@ -98,6 +98,18 @@ FILE_KEYWORD_MAP: dict[str, list[str]] = {
         # Sinonim
         "jurusan komputer", "jurusan informatika", "kuliah di usd",
     ],
+    "usd_profil.txt": [
+        # Identitas universitas
+        "universitas", "usd", "sanata dharma", "universitas sanata dharma", "rektor universitas sanata dharma",
+        "sejarah", "berdiri", "didirikan", "pendiri", "jesuit", "serikat yesus", "rektor sanata dharma",
+        "visi", "misi", "tujuan", "filosofi", "tentang","rektor","wakil rektor","wakil rektor i","wakil rektor ii","wakil rektor iii","wakil rektor iv",
+        # Kontak & lokasi
+        "alamat", "lokasi", "kampus", "mrican", "paingan", "yogyakarta",
+        "telepon", "email", "kontak", 
+        # Fakta umum
+        "akreditasi", "fakultas", "jumlah mahasiswa", "rektor",
+        "swasta", "katolik", "ptk", "perguruan tinggi",
+    ],
 }
 
 

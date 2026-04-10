@@ -48,7 +48,7 @@ const AdminGallery = () => {
             await apiService.postFormData('/documentation', formData);
             setUploadData({ title: '', caption: '', image: null });
             fetchDocs();
-            alert('Photo uploaded successfully! 📸');
+            alert('Photo uploaded successfully!');
         } catch (error) {
             alert('Failed to upload. Ensure server is running.');
         } finally {
@@ -91,23 +91,23 @@ const AdminGallery = () => {
     return (
         <div className={styles.container}>
             <aside className={styles.sidebar}>
-                <div className={styles.logo}><h2>🎯 HMIF Admin</h2></div>
+                <div className={styles.logo}><h2>HMIF Admin</h2></div>
                 <nav className={styles.nav}>
                     <button className={styles.navItem} onClick={() => navigate('/admin-hmif-secret')}>
-                        📊 Dashboard
+                        Dashboard
                     </button>
-                    <button className={styles.navItem + ' ' + styles.active}>🖼️ Gallery</button>
+                    <button className={styles.navItem + ' ' + styles.active}>Gallery</button>
                     <button className={styles.navItem} onClick={() => navigate('/admin-hmif-secret/aspirations')}>
-                        💬 Aspirations
+                        Aspirations
                     </button>
                     <button className={styles.navItem} onClick={() => navigate('/admin-hmif-secret/forum')}>
-                        💭 Forum
+                        Forum
                     </button>
                 </nav>
                 <button className={styles.logoutBtn} onClick={() => {
                     sessionStorage.clear();
                     navigate('/admin-hmif-secret/login');
-                }}>🚪 Logout</button>
+                }}>Logout</button>
             </aside>
 
             <main className={styles.main}>
@@ -140,7 +140,7 @@ const AdminGallery = () => {
                             className={styles.fileInput}
                         />
                         <button type="submit" disabled={isUploading} className={styles.uploadBtn}>
-                            {isUploading ? 'Uploading...' : '📤 Upload'}
+                            {isUploading ? 'Uploading...' : 'Upload'}
                         </button>
                     </form>
                 </div>
@@ -175,8 +175,8 @@ const AdminGallery = () => {
                                     <h4>{doc.title}</h4>
                                     <p>{doc.caption || 'No caption'}</p>
                                     <div className={styles.cardActions}>
-                                        <button onClick={() => setEditingId(doc._id)} className={styles.editBtn}>✏️ Edit</button>
-                                        <button onClick={() => handleDelete(doc._id)} className={styles.deleteBtn}>🗑️ Delete</button>
+                                        <button onClick={() => setEditingId(doc._id)} className={styles.editBtn}>Edit</button>
+                                        <button onClick={() => handleDelete(doc._id)} className={styles.deleteBtn}>Delete</button>
                                     </div>
                                 </div>
                             )}

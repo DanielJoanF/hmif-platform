@@ -53,14 +53,14 @@ def run_tests():
         result = local_knowledge.search(query)
 
         if result and expected_file.replace(".txt", "").replace("_", " ").title() in result:
-            status = "✅ PASS"
+            status = "PASS"
             passed += 1
         else:
-            status = "❌ FAIL"
+            status = "FAIL"
             failed += 1
 
         print(f"{status} | Query: \"{query}\"")
-        if status == "❌ FAIL":
+        if status == "FAIL":
             if result:
                 # Show which files were actually matched
                 matched = [line for line in result.split("\n") if line.startswith("===")]

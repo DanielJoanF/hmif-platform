@@ -2,11 +2,11 @@ import { useState } from 'react';
 import styles from './MemberSection.module.css';
 import { hmifMembers } from '../data/members';
 
-const MemberCard = ({ jabatan, nama, foto, isCoordinator, isLeader, onPhotoClick }) => (
+const MemberCard = ({ jabatan, nama, foto, caption, isCoordinator, isLeader, onPhotoClick }) => (
     <div className={`${styles.card} ${isCoordinator ? styles.coordinator : ''} ${isLeader ? styles.leader : ''} glass-panel`}>
         <div
             className={`${styles.avatar} ${foto ? styles.clickable : ''}`}
-            onClick={() => foto && onPhotoClick(foto, nama)}
+            onClick={() => foto && onPhotoClick(foto, nama, caption)}
         >
             {foto ? (
                 <img src={foto} alt={nama} className={styles.avatarImg} />
@@ -21,10 +21,10 @@ const MemberCard = ({ jabatan, nama, foto, isCoordinator, isLeader, onPhotoClick
 
 const MemberSection = () => {
     const [previewOpen, setPreviewOpen] = useState(false);
-    const [previewData, setPreviewData] = useState({ foto: '', nama: '' });
+    const [previewData, setPreviewData] = useState({ foto: '', nama: '', caption: '' });
 
-    const openPreview = (foto, nama) => {
-        setPreviewData({ foto, nama });
+    const openPreview = (foto, nama, caption) => {
+        setPreviewData({ foto, nama, caption: caption || '' });
         setPreviewOpen(true);
     };
 
@@ -71,6 +71,7 @@ const MemberSection = () => {
                             <MemberCard
                                 nama={division.coordinator.nama}
                                 foto={division.coordinator.foto}
+                                caption={division.coordinator.caption}
                                 jabatan="Koordinator"
                                 isCoordinator
                                 onPhotoClick={openPreview}
@@ -84,6 +85,7 @@ const MemberSection = () => {
                                     key={mIdx}
                                     nama={member.nama}
                                     foto={member.foto}
+                                    caption={member.caption}
                                     onPhotoClick={openPreview}
                                 />
                             ))}
@@ -99,6 +101,9 @@ const MemberSection = () => {
                         <button className={styles.modalClose} onClick={closePreview}>✕</button>
                         <img src={previewData.foto} alt={previewData.nama} className={styles.modalImage} />
                         <p className={styles.modalName}>{previewData.nama}</p>
+                        {previewData.caption && (
+                            <p className={styles.modalCaption}>"{previewData.caption}"</p>
+                        )}
                     </div>
                 </div>
             )}

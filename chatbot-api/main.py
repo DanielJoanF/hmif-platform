@@ -12,7 +12,6 @@ from contextlib import asynccontextmanager
 
 import router
 import local_knowledge
-import web_fetcher
 import llm_service
 import cache
 

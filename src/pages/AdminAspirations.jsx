@@ -50,14 +50,14 @@ const AdminAspirations = () => {
     return (
         <div className={styles.container}>
             <aside className={styles.sidebar}>
-                <div className={styles.logo}><h2>🎯 HMIF Admin</h2></div>
+                <div className={styles.logo}><h2>HMIF Admin</h2></div>
                 <nav className={styles.nav}>
-                    <button className={styles.navItem} onClick={() => navigate('/admin-hmif-secret')}>📊 Dashboard</button>
-                    <button className={styles.navItem} onClick={() => navigate('/admin-hmif-secret/gallery')}>🖼️ Gallery</button>
-                    <button className={styles.navItem + ' ' + styles.active}>💬 Aspirations</button>
-                    <button className={styles.navItem} onClick={() => navigate('/admin-hmif-secret/forum')}>💭 Forum</button>
+                    <button className={styles.navItem} onClick={() => navigate('/admin-hmif-secret')}>Dashboard</button>
+                    <button className={styles.navItem} onClick={() => navigate('/admin-hmif-secret/gallery')}>Gallery</button>
+                    <button className={styles.navItem + ' ' + styles.active}>Aspirations</button>
+                    <button className={styles.navItem} onClick={() => navigate('/admin-hmif-secret/forum')}>Forum</button>
                 </nav>
-                <button className={styles.logoutBtn} onClick={() => { sessionStorage.clear(); navigate('/admin-hmif-secret/login'); }}>🚪 Logout</button>
+                <button className={styles.logoutBtn} onClick={() => { sessionStorage.clear(); navigate('/admin-hmif-secret/login'); }}>Logout</button>
             </aside>
 
             <main className={styles.main}>

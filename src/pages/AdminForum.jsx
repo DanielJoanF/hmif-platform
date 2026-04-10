@@ -45,14 +45,14 @@ const AdminForum = () => {
     return (
         <div className={styles.container}>
             <aside className={styles.sidebar}>
-                <div className={styles.logo}><h2>🎯 HMIF Admin</h2></div>
+                <div className={styles.logo}><h2>HMIF Admin</h2></div>
                 <nav className={styles.nav}>
-                    <button className={styles.navItem} onClick={() => navigate('/admin-hmif-secret')}>📊 Dashboard</button>
-                    <button className={styles.navItem} onClick={() => navigate('/admin-hmif-secret/gallery')}>🖼️ Gallery</button>
-                    <button className={styles.navItem} onClick={() => navigate('/admin-hmif-secret/aspirations')}>💬 Aspirations</button>
-                    <button className={styles.navItem + ' ' + styles.active}>💭 Forum</button>
+                    <button className={styles.navItem} onClick={() => navigate('/admin-hmif-secret')}>Dashboard</button>
+                    <button className={styles.navItem} onClick={() => navigate('/admin-hmif-secret/gallery')}>Gallery</button>
+                    <button className={styles.navItem} onClick={() => navigate('/admin-hmif-secret/aspirations')}>Aspirations</button>
+                    <button className={styles.navItem + ' ' + styles.active}>Forum</button>
                 </nav>
-                <button className={styles.logoutBtn} onClick={() => { sessionStorage.clear(); navigate('/admin-hmif-secret/login'); }}>🚪 Logout</button>
+                <button className={styles.logoutBtn} onClick={() => { sessionStorage.clear(); navigate('/admin-hmif-secret/login'); }}>Logout</button>
             </aside>
 
             <main className={styles.main}>
@@ -69,7 +69,7 @@ const AdminForum = () => {
                                 <span className={styles.time}>{new Date(msg.timestamp).toLocaleString('id-ID')}</span>
                             </div>
                             <p className={styles.messageText}>{msg.text}</p>
-                            <button onClick={() => handleDelete(msg._id)} className={styles.deleteBtn}>🗑️ Delete</button>
+                            <button onClick={() => handleDelete(msg._id)} className={styles.deleteBtn}>Delete</button>
                         </div>
                     ))}
                     {messages.length === 0 && <div className={styles.empty}>No messages yet</div>}
